@@ -5,7 +5,7 @@
 
 groups:
 
-- name: mvp-demo
+- name: transaction-service
   jobs:
   - docker-build
   - k8s-deploy
@@ -19,7 +19,7 @@ resources:
   - name: git-repo
     type: git
     source:
-      uri: git@github.com:mohamadjamal/mvp-transaction-service.git
+      uri: git@github.com:mohamadjamal/transaction-service.git
       branch: master
       private_key: ((private-repo-key))
 
