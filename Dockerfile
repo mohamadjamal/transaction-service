@@ -4,11 +4,11 @@
 
 ## 1. Specify base image or sdk image
 
-
 FROM maven:3.6.3-jdk-8 AS build-env
 
 
-## 2. Create app directory as workdir
+
+## 2. Create app directory
 WORKDIR /usr/src/app
 
 ## 3. Copy files which contains project dependencies
@@ -29,8 +29,8 @@ RUN mvn package
 
 ## 1. Specify runtime image
 
-
 FROM openjdk:8-jdk-alpine as runtime
+
 
 
 ## 2. Specify work directory
