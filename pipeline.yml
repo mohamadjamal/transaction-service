@@ -1,0 +1,60 @@
+---
+#############################################
+## Groups
+#############################################
+
+groups:
+
+- name: mvp-demo
+  jobs:
+  - docker-build
+  - k8s-deploy
+ 
+#############################################
+## Resources
+#############################################
+
+resources:
+
+  - name: git-repo
+    type: git
+    source:
+      uri: git@github.com:mohamadjamal/mvp-transaction-service.git
+      branch: master
+      private_key: ((private-repo-key))
+
+  - name: docker-image-registry
+    type: docker-image
+    source:
+      repository: mohamadjamal/bfs-mvp
+      tag: transaction-service-docker-aws
+      username: ((dockerhub-username))
+      password: ((dockerhub-access-token))
+
+  - name: k8s
+    type: task
+    source:
+      kubeconfig: {{kubernetes-server-url}}
+
+jobs:
+  - name: "docker-build"
+    public: true
+    plan:
+      - get: git-repo
+        trigger: true
+      - put: docker-image-registry
+        params:
+          build: git-repo
+
+  - name: "k8s-deploy"
+    public: true
+    plan:
+      config:
+        platform: linux
+        run:
+          path: sh
+          args:
+            - -exc
+            - |
+              curl https://raw.githubusercontent.com/selvendiranj/k8s-mvp/master/config -o config
+              curl https://raw.githubusercontent.com/mohamadjamal/transaction-service/master/deployment.yml --kubeconfig=./config
