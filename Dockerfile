@@ -1,6 +1,8 @@
 FROM openjdk:8-jdk-alpine
 
-ARG JAR_FILE=target/[[${finalName}]].jar
+RUN mvn clean package
+
+ARG JAR_FILE=target/transaction-service.jar
 
 COPY ${JAR_FILE} app.jar
 
