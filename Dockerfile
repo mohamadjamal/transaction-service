@@ -13,14 +13,14 @@ COPY src /usr/src/app
 ## 5. package the artifact
 RUN mvn clean package
 
-RUN ls -lrt
-
 RUN cd target
 
-RUN ls -lrt
+RUN ls -lr
+
+WORKDIR /usr/src/app
 
 ## 6. Copy artificat
-COPY /usr/src/app/target/transaction-service-0.0.1-SNAPSHOT.jar app.jar
+COPY target/transaction-service-0.0.1-SNAPSHOT.jar app.jar
 
 ## 7. Execute
 ENTRYPOINT ["java","-jar","/app.jar"]
