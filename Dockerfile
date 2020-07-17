@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY pom.xml /usr/src/app
 
 ## 4. Copy all source codes from application / microservice
-COPY src /usr/src/app
+COPY src /usr/src/app/src
 
 ## 5. package the artifact
 RUN mvn clean package
