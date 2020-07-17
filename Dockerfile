@@ -1,6 +1,4 @@
-FROM openjdk:8-jdk-alpine
-
-RUN mvn clean package
+FROM maven:3.6.3-jdk-8 AS build-env
 
 ARG JAR_FILE=target/transaction-service.jar
 
