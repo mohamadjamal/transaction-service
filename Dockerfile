@@ -14,7 +14,7 @@ COPY src /usr/src/app
 RUN mvn clean package
 
 ## 6. Copy artificat
-COPY /usr/src/app/target/transaction-service.jar app.jar
+COPY /usr/src/app/target/transaction-service-0.0.1-SNAPSHOT.jar app.jar
 
 ## 7. Execute
 ENTRYPOINT ["java","-jar","/app.jar"]
