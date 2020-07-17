@@ -13,6 +13,8 @@ COPY src /usr/src/app/src
 ## 5. package the artifact
 RUN mvn clean package
 
+FROM maven:3.6.3-jdk-8 AS runtime-env
+
 ## 6. Copy artificat
 COPY --from=build-env /usr/src/app/target/transaction-service-0.0.1-SNAPSHOT.jar app.jar
 
