@@ -13,6 +13,12 @@ COPY src /usr/src/app
 ## 5. package the artifact
 RUN mvn clean package
 
+RUN ls -lrt
+
+RUN cd target
+
+RUN ls -lrt
+
 ## 6. Copy artificat
 COPY /usr/src/app/target/transaction-service-0.0.1-SNAPSHOT.jar app.jar
 
