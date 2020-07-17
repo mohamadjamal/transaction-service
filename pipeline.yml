@@ -46,6 +46,8 @@ jobs:
     plan:
       - get: docker-image-registry
         trigger: true
+        passed:
+          - "docker-build"
       - task: deploy-file
         config:
           platform: linux
@@ -62,4 +64,4 @@ jobs:
                 chmod +x ./kubectl
                 mv ./kubectl /usr/local/bin/kubectl
                 curl https://raw.githubusercontent.com/selvendiranj/k8s-mvp/master/config -o config
-                kubectl apply -f https://raw.githubusercontent.com/selvendiranj/k8s-mvp/master/deployment.yaml --kubeconfig=./config
+                kubectl apply -f https://raw.githubusercontent.com/mohamadjamal/transaction-service/master/deployment.yml --kubeconfig=./config
