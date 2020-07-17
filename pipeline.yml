@@ -46,6 +46,8 @@ jobs:
     plan:
       - get: docker-image-registry
         trigger: true
+        passed:
+          - "docker-build"
       - task: deploy-file
         config:
           platform: linux
